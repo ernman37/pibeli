@@ -23,3 +23,15 @@ class Candle(BaseModel):
     volume: float = Field(..., description="The trading volume of the candle")
     interval: CandleInterval = Field(..., description="The time interval of the candle")
     timestamp: datetime = Field(..., description="The timestamp of the candle")
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Candle):
+            return NotImplemented
+        return (
+            self.ticker == other.ticker
+            and self.interval == other.interval
+            and self.timestamp == other.timestamp
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.ticker, self.interval, self.timestamp))
