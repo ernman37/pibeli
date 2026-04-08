@@ -10,9 +10,9 @@ assignees: ""
 <!-- A clear and concise description of what the bug is. -->
 
 ## Steps to reproduce
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## Expected behaviour
 <!-- What you expected to happen. -->
