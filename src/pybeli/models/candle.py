@@ -15,6 +15,21 @@ class CandleInterval(StrEnum):
 
 
 class Candle(BaseModel):
+    """Candle.
+
+    Represents a single candlestick in a stock chart
+
+    Attributes:
+        ticker (str): The ticker symbol of the asset.
+        open (float): The opening price of the candle.
+        high (float): The highest price of the candle.
+        low (float): The lowest price of the candle.
+        close (float): The closing price of the candle.
+        volume (float): The trading volume of the candle.
+        interval (CandleInterval): The time interval of the candle.
+        timestamp (datetime): The timestamp of the candle.
+    """
+
     ticker: str = Field(..., description="The ticker symbol of the asset")
     open: float = Field(..., description="The opening price of the candle")
     high: float = Field(..., description="The highest price of the candle")
@@ -25,6 +40,14 @@ class Candle(BaseModel):
     timestamp: datetime = Field(..., description="The timestamp of the candle")
 
     def __eq__(self, other: object) -> bool:
+        """__eq__.
+
+        Two candles are considered equal if they have the same
+        ticker, interval, and timestamp.
+
+        Returns:
+            bool: True if the candles are equal, False otherwise.
+        """
         if not isinstance(other, Candle):
             return NotImplemented
         return (
@@ -34,4 +57,11 @@ class Candle(BaseModel):
         )
 
     def __hash__(self) -> int:
+        """__hash__.
+
+        Returns a hash of the candle based on its ticker, interval, and timestamp.
+
+        Returns:
+            int: A hash of the candle.
+        """
         return hash((self.ticker, self.interval, self.timestamp))
