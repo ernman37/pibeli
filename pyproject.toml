@@ -22,7 +22,9 @@ classifiers = [
 ]
 dependencies = [
     "click>=8.0",
+    "pyaml>=26.2.1",
     "pydantic>=2.12.5",
+    "types-pyyaml>=6.0.12.20260408",
     "yfinance>=1.2.1",
 ]
 

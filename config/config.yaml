@@ -1,0 +1,14 @@
+---
+tickers:
+  - "AAPL"
+  - "MSFT"
+  - "BTC-USD"
+intervals:
+  - "1m"
+  - "5m"
+  - "15m"
+period: "1mo"
+indicators:
+  - name: "RSI"
+    period: 14
+...

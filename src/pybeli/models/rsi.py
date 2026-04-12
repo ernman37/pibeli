@@ -53,24 +53,26 @@ class RSI(BaseModel):
             gains.append(gain)
             losses.append(loss)
 
-            if i >= window:
-                avg_gain = sum(gains[-window:]) / window
-                avg_loss = sum(losses[-window:]) / window
+            if i < window:
+                continue
 
-                if avg_loss == 0:
-                    rsi = 100.0
-                else:
-                    rs = avg_gain / avg_loss
-                    rsi = 100 - (100 / (1 + rs))
+            avg_gain = sum(gains[-window:]) / window
+            avg_loss = sum(losses[-window:]) / window
 
-                rsi_values.append(
-                    RSI(
-                        timestamp=candles[i].timestamp,
-                        ticker=candles[i].ticker,
-                        interval=candles[i].interval,
-                        window=window,
-                        value=rsi,
-                    )
+            if avg_loss == 0:
+                rsi = 100.0
+            else:
+                rs = avg_gain / avg_loss
+                rsi = 100 - (100 / (1 + rs))
+
+            rsi_values.append(
+                RSI(
+                    timestamp=candles[i].timestamp,
+                    ticker=candles[i].ticker,
+                    interval=candles[i].interval,
+                    window=window,
+                    value=rsi,
                 )
+            )
 
         return rsi_values
