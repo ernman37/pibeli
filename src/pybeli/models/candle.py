@@ -7,11 +7,27 @@ from pydantic import BaseModel, Field
 
 
 class CandleInterval(StrEnum):
+    """
+    Candle intervals.
+
+    Represents the time intervals for candlestick data in stock charts.
+
+    Valid intervals: 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo
+    """
+
     ONE_MINUTE = "1m"
+    TWO_MINUTES = "2m"
     FIVE_MINUTES = "5m"
     FIFTEEN_MINUTES = "15m"
+    THIRTY_MINUTES = "30m"
+    SIXTY_MINUTES = "60m"
+    NINETY_MINUTES = "90m"
     ONE_HOUR = "1h"
     ONE_DAY = "1d"
+    FIVE_DAYS = "5d"
+    ONE_WEEK = "1wk"
+    ONE_MONTH = "1mo"
+    THREE_MONTHS = "3mo"
 
 
 class Candle(BaseModel):
