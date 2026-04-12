@@ -3,10 +3,10 @@ from __future__ import annotations
 import math
 
 import pytest
+from utils import create_candle, create_datetime
 
 from pybeli.models.candle import Candle
 from pybeli.models.rsi import RSI
-from tests.models.utils import create_candle, create_datetime
 
 
 def _candles_from_closes(
