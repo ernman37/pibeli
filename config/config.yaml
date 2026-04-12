@@ -11,4 +11,6 @@ period: "1mo"
 indicators:
   - name: "RSI"
     period: 14
+    buy: 30
+    sell: 70
 ...

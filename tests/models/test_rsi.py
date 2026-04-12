@@ -6,7 +6,8 @@ import pytest
 from utils import create_candle, create_datetime
 
 from pybeli.models.candle import Candle
-from pybeli.models.rsi import RSI
+from pybeli.models.rsi import RSI, RSIStrategy
+from pybeli.models.signal import Signal
 
 
 def _candles_from_closes(
@@ -80,3 +81,18 @@ def test_calculate_mixed_changes_matches_expected_rsi() -> None:
     assert first.window == window
     assert first.timestamp == candles[window].timestamp
     assert math.isclose(first.value, expected, rel_tol=0, abs_tol=1e-12)
+
+
+def test_analyze_buy_signal() -> None:
+    strategy = RSIStrategy(buy_threshold=30, sell_threshold=70)
+    datetime = create_datetime(minute=0)
+    ticker = "TEST"
+    rsi = RSI(value=25, timestamp=datetime, ticker=ticker, interval="1d", window=14)
+    signal = strategy.analyze(rsi)
+    assert signal == Signal.BUY
+    rsi = RSI(value=75, timestamp=datetime, ticker=ticker, interval="1d", window=14)
+    signal = strategy.analyze(rsi)
+    assert signal == Signal.SELL
+    rsi = RSI(value=50, timestamp=datetime, ticker=ticker, interval="1d", window=14)
+    signal = strategy.analyze(rsi)
+    assert signal == Signal.WAIT
