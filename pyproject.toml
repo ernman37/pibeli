@@ -22,7 +22,8 @@ classifiers = [
 ]
 dependencies = [
     "click>=8.0",
-    "pydantic>=2.12.5"
+    "pydantic>=2.12.5",
+    "yfinance>=1.2.1",
 ]
 
 [project.urls]
